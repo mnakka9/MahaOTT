@@ -9,7 +9,6 @@ async function MoviePage({ params }: {params: Props}) {
   const { id } = await params;
   const movieDetail = await getMovieById(id);
   const streamingServices = await getWatchProvidersById(id);
-  console.log(movieDetail);
   let indianServices = streamingServices.results.IN;
   let movieLang = movieDetail.original_language;
 
