@@ -1,6 +1,7 @@
 import { getDiscoverMovies } from '@/app/utils/get-movies';
 import MovieCarousel from '@/components/ui/movie-carousel';
 import React from 'react'
+import { Movie } from '../../../../typings';
 
 type Props = {
     params: {
@@ -11,8 +12,11 @@ type Props = {
     };
 }
 
-async function GenrePage({params: {id}, searchParams: {genre}}: Props) {
-    const movies = await getDiscoverMovies(id);
+async function GenrePage({ params, searchParams }: Props) {
+    const { id } = params;
+    const { genre } = searchParams;
+
+    const movies: Movie[] = await getDiscoverMovies(id);
   return (
     <div className="max-w-7xl max-auto">
     <div className="flex flex-col space-y-4 mt-32 xl:mt-42">
