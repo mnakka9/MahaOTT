@@ -2,13 +2,11 @@ import { getPopularMovies, getSearchMovies } from "@/app/utils/get-movies";
 import MovieCarousel from "@/components/ui/movie-carousel";
 import { notFound } from "next/navigation";
 
-type Props = {
-  params: {
-    term: string
-  };
-};
+type Props = Promise<{ term: string }>;
 
-async function SearchPage({params: { term }}: Props) {
+async function SearchPage({params}:{params: Props}) {
+  let {term} = await params;
+
   if(!term)
     return notFound();
 

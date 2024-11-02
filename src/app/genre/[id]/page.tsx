@@ -2,19 +2,16 @@ import { getDiscoverMovies } from '@/app/utils/get-movies';
 import MovieCarousel from '@/components/ui/movie-carousel';
 import React from 'react'
 import { Movie } from '../../../../typings';
+import { getGenres } from '@/app/utils/get-genres';
 
-type Props = {
-    params: {
-        id: string
-    };
-    searchParams: {
-        genre: string
-    };
-}
+type Props = Promise<{ id: string }>
 
-async function GenrePage({ params, searchParams }: Props) {
-    const { id } = params;
-    const { genre } = searchParams;
+async function GenrePage({ params }: { params: Props}) {
+    const { id } = await params;
+    
+    const genres = await getGenres();
+
+    const genre = genres.genres.find(x => x.id == parseInt(id))?.name
 
     const movies: Movie[] = await getDiscoverMovies(id);
   return (

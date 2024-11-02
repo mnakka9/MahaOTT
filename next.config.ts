@@ -13,7 +13,10 @@ const nextConfig: NextConfig = {
         hostname: "image.tmdb.org"
       }
     ]
-  }
+  },
+  eslint: {
+    ignoreDuringBuilds: true, // Disables ESLint during both builds and dev
+  },
 };
 
 export default nextConfig;

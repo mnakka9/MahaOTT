@@ -3,13 +3,10 @@ import { getMovieById, getWatchProvidersById } from "@/app/utils/get-movies";
 import Image from "next/image";
 import React from "react";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
+type Props = Promise<{ id: string; }>;
 
-async function MoviePage({ params: { id } }: Props) {
+async function MoviePage({ params }: {params: Props}) {
+  const { id } = await params;
   const movieDetail = await getMovieById(id);
   const streamingServices = await getWatchProvidersById(id);
   console.log(movieDetail);
